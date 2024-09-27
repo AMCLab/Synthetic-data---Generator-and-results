@@ -1,0 +1,2 @@
+Random Training Data Seed: 49
+Random Validation Data Seed: 90

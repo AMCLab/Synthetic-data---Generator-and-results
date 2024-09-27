@@ -1,0 +1,4 @@
+scyjava==1.9.1
+ncempy==1.11.1
+tifffile==2024.5.22
+numpy==1.26.4
