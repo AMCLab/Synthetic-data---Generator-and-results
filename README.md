@@ -24,7 +24,9 @@ This repository contains all the scripts necessary to replicate the results pres
 
 ## Running Code
 
-- Run the ```all_results.sh``` shell script to automatically run all of the Python scripts required to obtain the paper results.
+- Navigate to ```reproduce_results_amorphous_carbon``` directory and run ```bash amorphous_carbon_results.sh```
+- Navigate to ```reproduce_results_lacey_carbon``` directory and run ```bashlacey_carbon_results.sh```
+
 - The raw results data are available at ```experimental data\amorphous carbon grids``` and ```experimental data\lacey carbon grids```.
 - The result plots are available in ```reproduce_results_lacey_carbon/figures``` and ```reproduce_results_amorphous_carbon/figures```.
 
