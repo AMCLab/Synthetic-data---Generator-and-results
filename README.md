@@ -2,9 +2,7 @@
 
 ### Summary
 
-This repository contains all the scripts necessary to replicate the results presented in the synthetic data paper paper draft at https://www.overleaf.com/project/663c753ae7583a859de7f2a1
-
-Enjoy, and any questions can be sent to eoinpadraigwalsh26+research@gmail.com.
+This repository contains all the scripts necessary to replicate the results presented in the synthetic data paper.
 
 ### Instructions
 
@@ -20,10 +18,8 @@ Enjoy, and any questions can be sent to eoinpadraigwalsh26+research@gmail.com.
     1. ```conda create -n deep_learning python=3.8.19```
     2. Run ```pip install -r requirements_deep_learning.txt``` within the newly created conda environment, and in the cloned Github directory.
   
-- We create a mamba environment and install relevant packages for replicating the ImageJ results.
-    1. Install mamba using the instructions here: https://py.imagej.net/en/latest/Install.html
-    2. Activate conda-forge ```conda config --add channels conda-forge``` and ```conda config --set channel_priority strict```.
-    3. Install pyimagej and create an environment for it in conda using: ```mamba create -n pyimagej pyimagej openjdk=11```
+- We create another conda environment and install relevant packages for replicating the ImageJ results.
+    3. Install pyimagej and create an environment for it in conda using: ```conda create -n pyimagej pyimagej openjdk=11```
     4. Run ```pip install -r requirements_imagej.txt``` within the newly created conda environment, and in the cloned Github directory.
 
 ## Running Code
@@ -33,4 +29,3 @@ Enjoy, and any questions can be sent to eoinpadraigwalsh26+research@gmail.com.
 - The result plots are available in ```reproduce_results_lacey_carbon/figures``` and ```reproduce_results_amorphous_carbon/figures```.
 
 - All individual Python scripts are available at ```reproduce_results_lacey_carbon``` and ```reproduce_results_amorphous_carbon```, with the ordering in which they should be run detailed in shell scripts in both folders.
-
