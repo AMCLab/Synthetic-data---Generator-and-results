@@ -31,6 +31,8 @@ def normalise(array):
 
 save = True
 
+os.chdir('..')
+
 dm4_path = "experimental data/amorphous carbon grids/2023_02_MicroscopyData"
 
 data_paths = []

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source C:/Users/ewalsh/AppData/Local/miniconda3/etc/profile.d/conda.sh
-
 echo "Obtaining ML Results.."
 
 conda run -n deep_learning python obtain_deep_learning_predictions_lacey_carbon.py

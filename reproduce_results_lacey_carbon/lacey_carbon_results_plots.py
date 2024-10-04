@@ -29,7 +29,7 @@ def normalise(array):
 
 save = True
 
-os.chdir("..")
+os.chdir('..')
 
 dm4_path = "experimental data/lacey carbon grids/dm4"
 
@@ -360,7 +360,7 @@ for j in range(len(precisions_thresh)):
 
             plt.savefig("large_magnification_data_analysis.pdf", dpi=1000)
             
-dm4_path = "experimental data/amorphous carbon grids/dm4"
+dm4_path = "experimental data/lacey carbon grids/dm4"
 
 path_ml_curves = "experimental data/lacey carbon grids/deep_learning_analysis"
 
