@@ -1,4 +1,4 @@
-## Synthetic Silica Particle Generator - Chapter 5
+## Synthetic Silica Particle Generator & Results
 
 ### Summary
 
