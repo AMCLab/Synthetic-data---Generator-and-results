@@ -19,8 +19,8 @@ This repository contains all the scripts necessary to replicate the results pres
     2. Run ```pip install -r requirements_deep_learning.txt``` within the newly created conda environment, and in the cloned Github directory.
   
 - We create another conda environment and install relevant packages for replicating the ImageJ results.
-    3. Install pyimagej and create an environment for it in conda using: ```conda create -n pyimagej pyimagej openjdk=11```
-    4. Run ```pip install -r requirements_imagej.txt``` within the newly created conda environment, and in the cloned Github directory.
+    1. Install pyimagej and create an environment for it in conda using: ```conda create -n pyimagej pyimagej openjdk=11```
+    2. Run ```pip install -r requirements_imagej.txt``` within the newly created conda environment, and in the cloned Github directory.
 
 ## Running Code
 
