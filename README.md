@@ -10,7 +10,7 @@ This repository contains all the scripts necessary to replicate the results pres
 
 - Next, download the experimental data available at https://zenodo.org/uploads/11569905, and extract the data to the cloned Github repository location on your local machine.
   
-## Conda/Mamba Environment Setup
+## Conda Environment Setup
 
 - install miniconda or anaconda from https://docs.conda.io/projects/miniconda/en/latest/
 
