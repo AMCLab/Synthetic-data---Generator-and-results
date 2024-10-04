@@ -2,7 +2,7 @@
 
 ### Summary
 
-This repository contains all the scripts necessary to replicate the results presented in the synthetic data paper.
+This repository contains all the scripts necessary to replicate the results presented in the synthetic data paper. This repository and these instructions were developed to work on a linux OS.
 
 ### Instructions
 
