@@ -696,9 +696,10 @@ def create_dirs(directory):
         
         os.mkdir(os.path.join(directory, 'validation_data', 'masks', 'msks'))
         
-def generate_data(number_image_batches, 
+def generate_data(number_images,
                   number_particles,
                   magnification_range,
+                  number_magnification_intervals,
                   particle_intensity_range, 
                   background_brightness_range,
                   graphene_intensity_range,
@@ -710,7 +711,10 @@ def generate_data(number_image_batches,
                   rand_mag = True,
                   include_sobel_graphene = True,
                   graphene_intensity_mean_rand = True,
-                  folder='training_data'):
+                  folder='training_data',
+                  dataset_type = 'small mag',
+                  plot_image=False,
+                  save_image=False):
     
     baseline_mag = 4300
     
@@ -718,24 +722,22 @@ def generate_data(number_image_batches,
     
     np.random.seed()
     
-    if rand_mag == True:
+    if rand_mag == False:
         
-        iterant = 1
-        
-        number_image_batches *= 3
+        number_mags = number_magnification_intervals
     
     else:
-        iterant = 3
+        number_mags = 1
+
+    for j in range(number_mags):
         
-    for j in tqdm(range(number_image_batches)):
-        
-        for i in range(iterant):
+        for i in tqdm(range(int(number_images/number_mags))):
             
             if rand_mag == True:
                 
                 mag = baseline_mag/(np.random.randint(magnification_range[0], magnification_range[1]))
             else:
-                mag_mult = ((magnification_range[1] - magnification_range[0])/2)*i
+                mag_mult = ((magnification_range[1] - magnification_range[0])/2)*j
                 
                 mag = baseline_mag/(magnification_range[0] + mag_mult)
                 
@@ -846,21 +848,31 @@ def generate_data(number_image_batches,
             
             ellipse_array_mask = ellipse_array_mask.astype('uint8')
             
-            tif.imwrite(os.path.join(os.getcwd(), 'synthetic_data', folder+'/imgs/images/image_'+str(count)+'.tif'),final_img)
-            
-            tif.imwrite(os.path.join(os.getcwd(), 'synthetic_data', folder+'/msks/masks/image_'+str(count)+'.tif'),ellipse_array_mask)
+            if plot_image == True:
+
+                plt.imshow(final_img, cmap='Greys_r')
+                plt.show()
+
+                plt.imshow(ellipse_array_mask, cmap='Greys_r')
+                plt.show()
+
+            if save_image == True:
+
+                tif.imwrite(os.path.join(os.getcwd(), 'synthetic_data', folder+'/imgs/images/image_'+str(count)+'.tif'),final_img)
+                
+                tif.imwrite(os.path.join(os.getcwd(), 'synthetic_data', folder+'/msks/masks/image_'+str(count)+'.tif'),ellipse_array_mask)
             
             count = count + 1
 
-def choose_dataset(dataset_type):
+def choose_dataset(dataset_type, number_training_images, number_validation_images):
     
     create_training_dirs()
 
     start = time.time()
    
     if dataset_type == "small mag":
-
-        number_image_batches = 10
+        
+        number_magnification_intervals=3
 
         number_particles = np.random.randint(15,20)
 
@@ -890,7 +902,7 @@ def choose_dataset(dataset_type):
 
     elif dataset_type == "medium mag":
         
-        number_image_batches = 3
+        number_magnification_intervals=3
 
         number_particles = np.random.randint(1, 4)
 
@@ -921,7 +933,7 @@ def choose_dataset(dataset_type):
 
     elif dataset_type == "large mag":
         
-        number_image_batches = 3
+        number_magnification_intervals=3
 
         number_particles = np.random.randint(1, 4)
 
@@ -949,18 +961,16 @@ def choose_dataset(dataset_type):
 
         include_sobel_graphene = False
 
-
     else:
         
         raise ValueError("This type of dataset does not exist. Select from: 'small mag', 'medium mag', and 'large mag.'")
-    
-    if number_image_batches > 3:
-        
-        number_image_batches = int(number_image_batches/3)
 
-    generate_data(number_image_batches, 
+    print("Generating Training Data..")
+
+    generate_data(number_training_images,
                   number_particles,
                   magnification_range,
+                  number_magnification_intervals,
                   particle_intensity_range, 
                   background_brightness_range,
                   graphene_intensity_range,
@@ -972,8 +982,33 @@ def choose_dataset(dataset_type):
                   graphene_intensity_mean_rand = graphene_intensity_mean_rand,
                   include_sobel_graphene = include_sobel_graphene,
                   rand_mag = rand_mag,
-                  folder='validation_data')
-    
+                  folder='training_data',
+                  dataset_type = dataset_type,
+                  plot_image=False,
+                  save_image=True)
+
+    print("Generating Validation Data..")
+
+    generate_data(number_validation_images,
+                  number_particles,
+                  magnification_range,
+                  number_magnification_intervals,
+                  particle_intensity_range, 
+                  background_brightness_range,
+                  graphene_intensity_range,
+                  lacey_carbon_intensity_mean_range,
+                  lacey_carbon_intensity_std,
+                  random_lacey_carbon_brightness_change,
+                  gradient=gradient, 
+                  shadow=shadow, 
+                  graphene_intensity_mean_rand = graphene_intensity_mean_rand,
+                  include_sobel_graphene = include_sobel_graphene,
+                  rand_mag = rand_mag,
+                  folder='validation_data',
+                  dataset_type = dataset_type,
+                  plot_image=False,
+                  save_image=True)
+
     path = os.path.join(os.getcwd(), 'synthetic_data/training_data/imgs/images')
 
     normalise_dataset(path)

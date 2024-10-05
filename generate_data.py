@@ -7,8 +7,18 @@ Created on Fri Apr 14 16:02:55 2023
 
 import lacey_carbon_TEM_synthetic_data_generator as generator 
 
-number_batches = 10
 
-dataset_type = "small mag"
+''' Generate synthetic lacey carbon training data for the synthetic data paper.
+    
+    Generated data saved in a new folder called 'synthetic_data'.
 
-generator.choose_dataset(dataset_type)
+    Can use "small mag", "medium mag", or "large mag" as string for variable 'dataset_type'.
+'''
+
+number_training_images = 30
+
+number_validation_images = 10
+
+dataset_type = "large mag" # can call "small mag", "medium mag", or "large mag"
+
+generator.choose_dataset(dataset_type, number_training_images, number_validation_images)
