@@ -8,6 +8,9 @@ Created on Fri Apr 14 16:02:55 2023
 import lacey_carbon_TEM_synthetic_data_generator as generator 
 import numpy as np
 
+''' Script for experimenting with parameters in the lacey carbon grid generator codebase.
+'''
+
 generator.generate_data(number_images=1, #number of images to generate in total.
                         number_particles=np.random.randint(5,8), #range of number of particles to generate per image, randomised in this range per image.
                         magnification_range=(10000,20000), #magnification range for the generated dataset.
