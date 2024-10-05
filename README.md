@@ -45,3 +45,11 @@ We create 3 distinct environments to run the code in this repository, one for ge
 - Run the ```generate_data.py``` script to reproduce the synthetic data generated for the paper. Further instructions on usage can be found as docstrings in the script itself.
 
 - Experiment and augment with synthetic data parameters for your own use case using the ```synthetic_data_experimentation.py``` script.
+
+## Running Code - ALGORITHM TRAINING
+
+NB: You will need a GPU to run the following scripts efficiently.
+
+- Run the ```PAT4NANO_ml_training.py``` script to train a deep learning algorithm using the generated synthetic data in the /synthetic_data directory. 
+
+- Run the ```grid_search_PAT4NANO.py``` script to optimise hyperparameters in the deep learning algorithm for your generated synthetic datasaet.
