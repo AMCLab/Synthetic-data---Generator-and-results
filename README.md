@@ -1,4 +1,4 @@
-## Synthetic Silica Particle Generator & Results
+## Synthetic Lacey-Carbon Grid + Silica Particle Generator & Paper Results
 
 ### Summary
 
