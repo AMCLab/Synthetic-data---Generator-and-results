@@ -2,7 +2,9 @@
 
 ### Summary
 
-This repository contains all the scripts necessary to replicate the results presented in the synthetic data paper. This repository and these instructions were developed to work on a linux OS.
+This repository contains all the scripts necessary to replicate the results presented in the synthetic data paper. It also contains instructions and code on generating synthetic lacey carbon on ultra-thin carbon grids.
+
+NB: This repository and these instructions were developed to work using a linux OS.
 
 ### Instructions
 
@@ -12,7 +14,13 @@ This repository contains all the scripts necessary to replicate the results pres
   
 ## Conda Environment Setup
 
+We create 3 distinct environments to run the code in this repository, one for generating the synthetic data, another for utilising the deep learning algorithms, finally an environment for obtaining global thresholding results from ImageJ.
+
 - install miniconda or anaconda from https://docs.conda.io/projects/miniconda/en/latest/
+
+- We create a conda environment and install relevant packages for replicating the deep learning results and conducting data analysis.
+    1. ```conda create -n lacey_carbon_generator python=3.8.19```
+    2. Run ```pip install -rrequirements_lacey_carbon_generator.txt``` within the newly created conda environment, and in the cloned Github directory.
 
 - We create a conda environment and install relevant packages for replicating the deep learning results and conducting data analysis.
     1. ```conda create -n deep_learning python=3.8.19```
@@ -22,7 +30,7 @@ This repository contains all the scripts necessary to replicate the results pres
     1. Install pyimagej and create an environment for it in conda using: ```conda create -n pyimagej pyimagej openjdk=11```
     2. Run ```pip install -r requirements_imagej.txt``` within the newly created conda environment, and in the cloned Github directory.
 
-## Running Code
+## Running Code - RESULTS
 
 - Navigate to ```reproduce_results_amorphous_carbon``` directory and run ```bash amorphous_carbon_results.sh```
 - Navigate to ```reproduce_results_lacey_carbon``` directory and run ```bash lacey_carbon_results.sh```
@@ -31,3 +39,9 @@ This repository contains all the scripts necessary to replicate the results pres
 - The result plots are available in ```reproduce_results_lacey_carbon/figures``` and ```reproduce_results_amorphous_carbon/figures```.
 
 - All individual Python scripts are available at ```reproduce_results_lacey_carbon``` and ```reproduce_results_amorphous_carbon```, with the ordering in which they should be run detailed in shell scripts in both folders.
+
+## Running Code - SYNTHETIC DATA GENERATION
+
+- Run the ```generate_data.py``` script to reproduce the synthetic data generated for the paper. Further instructions on usage can be found as docstrings in the script itself.
+
+- Experiment and augment with synthetic data parameters for your own use case using the ```synthetic_data_experimentation.py``` script.
