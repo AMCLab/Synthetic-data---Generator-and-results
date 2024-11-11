@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Mar  4 12:00:13 2023
+Created on Mon Nov 11 12:18:20 2024
 
-@author: eoin.walsh
+@author: ewalsh
 """
 
 import numpy as np
@@ -33,7 +34,7 @@ save = True
 
 os.chdir('..')
 
-dm4_path = "experimental data/amorphous carbon grids/2023_02_MicroscopyData"
+dm4_path = "experimental data/lacey carbon grids/dm4"
 
 data_paths = []
 
@@ -45,9 +46,9 @@ for folders in os.listdir(dm4_path):
             
             data_paths.append(os.path.join(dm4_path, folders, data))
             
-path_ml = "experimental data/amorphous carbon grids/deep_learning_analysis_data"
+path_ml = "experimental data/lacey carbon grids/deep_learning_analysis"
 
-path_threshold = "experimental data/amorphous carbon grids/threshold_algorithm_analysis"
+path_threshold = "experimental data/lacey carbon grids/threshold_algorithm_analysis"
 
 precision_algo_1 = []
 
@@ -101,14 +102,9 @@ for data in tqdm(os.listdir(path_ml)):
     
     if ("roc_curve" in data) or  ("pr_curve" in data):
         continue
-        
-    for val in data_paths:
-        
-        if data[:-4] in val:
     
-            dm3_file = dm.dmReader(val) #read the dm3 file
-            break
-        
+    dm3_file = dm.dmReader(os.path.join(dm4_path, data[:-4]+".dm4")) #read the dm3 file
+    
     resolution = get_resolution(dm3_file['pixelSize'][0],dm3_file['pixelUnit'][0])
     
     with open(os.path.join(path_ml, data), 'r', newline='') as csvfile:
@@ -116,9 +112,7 @@ for data in tqdm(os.listdir(path_ml)):
         header = next(reader)
         vals = list(reader)
     
-    print(data)
-    
-    if ('0012' in data) or ('0013' in data)  or ('0015' in data): #um
+    if resolution < 0.0029 and resolution > 0.001: #um
     
         precision_algo_2.append(float(vals[0][0]))
 
@@ -130,7 +124,7 @@ for data in tqdm(os.listdir(path_ml)):
         
         pr_curve_area_2.append(float(vals[0][4]))
         
-    elif ('0005' in data) or ('0006' in data) or ('0008' in data): #um
+    elif resolution >= 0.0029: #um
     
         precision_algo_1.append(float(vals[0][0]))
 
@@ -142,7 +136,7 @@ for data in tqdm(os.listdir(path_ml)):
         
         pr_curve_area_1.append(float(vals[0][4]))
         
-    elif ('0017' in data) or ('0018' in data) or ('0019' in data): #um
+    elif resolution < 0.001 and resolution > 0.00025: #um
     
         precision_algo_3.append(float(vals[0][0]))
 
@@ -153,19 +147,29 @@ for data in tqdm(os.listdir(path_ml)):
         rc_curve_area_3.append(float(vals[0][3]))
         
         pr_curve_area_3.append(float(vals[0][4]))
+        
+precision_threshold_1 = []
+
+recall_threshold_1 = []
+
+f1_score_threshold_1 = []
+
+precision_threshold_2 = []
+
+recall_threshold_2 = []
+
+f1_score_threshold_2 = []
+
+precision_threshold_3 = []
+
+recall_threshold_3 = []
+
+f1_score_threshold_3 = []
 
 for data in tqdm(os.listdir(path_threshold)):
     
-    if ("roc_curve" in data) or  ("pr_curve" in data):
-        continue
+    dm3_file = dm.dmReader(os.path.join(dm4_path, data[:-4]+".dm4")) #read the dm3 file
     
-    for val in data_paths:
-        
-        if data[:-4] in val:
-    
-            dm3_file = dm.dmReader(val) #read the dm3 file
-            break
-        
     resolution = get_resolution(dm3_file['pixelSize'][0],dm3_file['pixelUnit'][0])
     
     with open(os.path.join(path_threshold, data), 'r', newline='') as csvfile:
@@ -173,8 +177,7 @@ for data in tqdm(os.listdir(path_threshold)):
         header = next(reader)
         vals = list(reader)
     
-    
-    if ('0012' in data) or ('0013' in data)  or ('0015' in data): #um
+    if resolution < 0.0029 and resolution > 0.001: #um
     
         precision_threshold_2.append(float(vals[0][0]))
 
@@ -182,15 +185,15 @@ for data in tqdm(os.listdir(path_threshold)):
 
         f1_score_threshold_2.append(float(vals[0][2]))
 
-    elif ('0005' in data) or ('0006' in data) or ('0008' in data): #um
-    
+    elif resolution >= 0.0029: #um
+        
         precision_threshold_1.append(float(vals[0][0]))
 
         recall_threshold_1.append(float(vals[0][1]))
 
         f1_score_threshold_1.append(float(vals[0][2]))
 
-    elif ('0017' in data) or ('0018' in data) or ('0019' in data): #um
+    elif resolution < 0.001 and resolution > 0.00025: #um
     
         precision_threshold_3.append(float(vals[0][0]))
 
