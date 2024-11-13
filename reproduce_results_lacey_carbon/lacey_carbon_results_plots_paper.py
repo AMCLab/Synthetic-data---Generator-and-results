@@ -15,6 +15,10 @@ import csv
 from tqdm import tqdm
 import ncempy.io.dm as dm
 import pandas as pd
+from matplotlib import rcParams
+
+rcParams['font.family'] = 'serif'
+rcParams['font.serif'] = ['CMU Serif']
 
 def get_resolution(resolution,unit):
     
@@ -235,11 +239,11 @@ for j in range(len(precisions_thresh)):
 
 for j in range(len(precisions_thresh)):
     
-    all_precisions_thresh_err.append(1.96*(np.std(precisions_thresh[j])/len(precisions_thresh[j])))
+    all_precisions_thresh_err.append(1.96*(np.std(precisions_thresh[j])/(np.sqrt(len(precisions_thresh[j])))))
 
 for j in range(len(precisions_thresh)):
     
-    all_precisions_ml_err.append(1.96*(np.std(precisions_ml[j])/len(precisions_thresh[j])))
+    all_precisions_ml_err.append(1.96*(np.std(precisions_ml[j])/(np.sqrt(len(precisions_thresh[j])))))
     
 cols = 43
 rows = 10
@@ -298,11 +302,11 @@ for j in range(len(precisions_thresh)):
 
 for j in range(len(precisions_thresh)):
     
-    all_recalls_thresh_err.append(1.96*(np.std(recalls_thresh[j])/len(recalls_thresh[j])))
+    all_recalls_thresh_err.append(1.96*(np.std(recalls_thresh[j])/(np.sqrt(len(recalls_thresh[j])))))
 
 for j in range(len(precisions_thresh)):
     
-    all_recalls_ml_err.append(1.96*(np.std(recalls_ml[j])/len(recalls_thresh[j])))
+    all_recalls_ml_err.append(1.96*(np.std(recalls_ml[j])/(np.sqrt(len(recalls_thresh[j])))))
     
 ax = fig.add_subplot(grid[row_size*0:row_size*1, (col_size*1)+1:(col_size*2)+1])
 
@@ -341,11 +345,11 @@ for j in range(len(precisions_thresh)):
     
 for j in range(len(precisions_thresh)):
     
-    all_f1scores_thresh_err.append(1.96*(np.std(f1_score_thresh[j])/len(f1_score_thresh[j])))
+    all_f1scores_thresh_err.append(1.96*(np.std(f1_score_thresh[j])/(np.sqrt(len(f1_score_thresh[j])))))
 
 for j in range(len(precisions_thresh)):
     
-    all_f1scores_ml_err.append(1.96*(np.std(f1_score_ml[j])/len(f1_score_ml[j])))
+    all_f1scores_ml_err.append(1.96*(np.std(f1_score_ml[j])/(np.sqrt(len(f1_score_ml[j])))))
     
 ax = fig.add_subplot(grid[row_size*0:row_size*1, (col_size*2)+2:(col_size*3)+2])
 
@@ -384,11 +388,11 @@ for vals in pr_avgs:
 
 for j in roc_avgs:
     
-    roc_err.append(1.96*(np.std(j)/len(j)))
+    roc_err.append(1.96*(np.std(j)/(np.sqrt(len(j)))))
 
 for j in pr_avgs:
     
-    pr_err.append(1.96*(np.std(j)/len(j)))
+    pr_err.append(1.96*(np.std(j)/(np.sqrt(len(j)))))
     
     
 ax = fig.add_subplot(grid[row_size*0:row_size*1, (col_size*3)+3:(col_size*4)+3])
