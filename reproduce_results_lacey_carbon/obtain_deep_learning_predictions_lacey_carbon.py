@@ -165,7 +165,7 @@ def get_resolution(resolution,unit):
 
 start = time.time() # start the time
 
-small_mag_model = deep_learning_models.small_magnification_model()
+# small_mag_model = deep_learning_models.small_magnification_model()
 
 medium_mag_model = deep_learning_models.medium_magnification_model()
 
